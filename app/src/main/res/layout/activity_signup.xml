@@ -186,7 +186,7 @@
         android:layout_marginTop="52dp"
         android:background="@drawable/signin_button"
         android:text="@string/register"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="@+id/guideline12"
         tools:layout_editor_absoluteX="30dp" />
 </android.support.constraint.ConstraintLayout>
