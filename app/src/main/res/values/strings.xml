@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">BuySell</string>
+    <string name="add_user">add user</string>
+    <string name="login">login</string>
+    <string name="email">email...</string>
+    <string name="paasword">paasword...</string>
+    <string name="sigin">sigin</string>
+    <string name="signup">signup</string>
+    <string name="enter_full_name">Enter full name</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="fe">FE</string>
+    <string name="se">SE</string>
+    <string name="te">TE</string>
+    <string name="be">BE</string>
+    <string name="year">Year</string>
+    <string name="year1">Year:</string>
+    <string name="register">Register</string>
+</resources>
