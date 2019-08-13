@@ -18,4 +18,6 @@
     <string name="year">Year</string>
     <string name="year1">Year:</string>
     <string name="register">Register</string>
+    <string name="password">password</string>
+    <string name="todo">TODO</string>
 </resources>

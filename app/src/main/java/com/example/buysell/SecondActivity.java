@@ -27,7 +27,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        email1=(EditText)findViewById(R.id.email);
+        email1=(EditText)findViewById(R.id.email_login);
         paasword1=(EditText)findViewById(R.id.paasword);
         login=(Button)findViewById(R.id.login_button);
         adduser=(Button)findViewById(R.id.add_user);
