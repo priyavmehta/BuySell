@@ -18,8 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class loginActivity extends AppCompatActivity {
 
-    private Button loginbutton;
-    private Button registerbutton;
     private TextInputEditText email;
     private TextInputEditText password;
     private FirebaseAuth mAuth;
@@ -28,32 +26,30 @@ public class loginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setTitle("Login form");
-
-        loginbutton=(Button)findViewById(R.id.login_btn);
-        registerbutton=(Button)findViewById(R.id.register);
-        email=(TextInputEditText)findViewById(R.id.email_login);
-        password=(TextInputEditText)findViewById(R.id.password_login);
+        Button loginButton = findViewById(R.id.login_btn);
+        Button registerButton = findViewById(R.id.register);
+        email = findViewById(R.id.email_login);
+        password = findViewById(R.id.password_login);
         mAuth=FirebaseAuth.getInstance();
         mAuthlistener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null){
-                    Toast.makeText(loginActivity.this," Enter email and paasword ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(loginActivity.this," Enter email and password ",Toast.LENGTH_LONG).show();
                 }
             }
         };
 
-        registerbutton.setOnClickListener(
+        registerButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(loginActivity.this,SignupActivity.class);
+                        Intent intent = new Intent(loginActivity.this,SignupActivity.class);
                         startActivity(intent);
                     }
                 }
         );
-        loginbutton.setOnClickListener(
+        loginButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -79,12 +75,11 @@ public class loginActivity extends AppCompatActivity {
         else {
 
 
-            mAuth.signInWithEmailAndPassword(e, pass).addOnCompleteListener(
-                    new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(e, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(loginActivity.this, "Sign in is successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(loginActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(loginActivity.this,HomePageAcytivity.class);
                                 startActivity(intent);
                             }

@@ -4,227 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     android:orientation="vertical"
     android:padding="30dp"
-    android:background="#eeedef"
     tools:context=".SignupActivity">
 
+    <android.support.design.card.MaterialCardView
+        android:layout_width="341dp"
+        android:layout_height="288dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="312dp"
+            android:orientation="vertical">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.25" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/email_login"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/enter_email"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="16dp"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="30dp" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.5" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword"
+                android:paddingBottom="16dp"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="90dp" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.75" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:paddingBottom="16dp"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="30dp"
+                tools:layout_editor_absoluteY="194dp" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="1.0" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.0"/>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="1.0"/>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="#ff6c02"
-        app:layout_constraintTop_toTopOf="@+id/guideline9">
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/name_login"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/enter_full_name"
-        android:inputType="textPersonName"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline9"
-        tools:layout_editor_absoluteX="30dp" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="85dp"
-        android:textColorHint="#ff6c02"
-        app:layout_constraintTop_toTopOf="@id/guideline9">
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="85dp"
-        android:ems="10"
-        android:hint="@string/enter_username"
-        android:inputType="textPersonName"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline9"
-        tools:layout_editor_absoluteX="30dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="20dp"
-        android:textColorHint="#ff6c02"
-        app:layout_constraintTop_toTopOf="@id/guideline10">
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/email_login"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:hint="@string/enter_email"
-        android:inputType="textEmailAddress"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
-        tools:layout_editor_absoluteX="30dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="90dp"
-        android:textColorHint="#ff6c02"
-        app:layout_constraintTop_toTopOf="@id/guideline10">
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="90dp"
-        android:ems="10"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
-        tools:layout_editor_absoluteX="30dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="20dp"
-        android:textColorHint="#ff6c02"
-        app:layout_constraintTop_toTopOf="@id/guideline11">
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/confirm_password"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:hint="@string/confirm_password"
-        android:inputType="textPassword"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline11"
-        tools:layout_editor_absoluteX="30dp" />
-    </android.support.design.widget.TextInputLayout>
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/guideline12"
-        tools:layout_editor_absoluteX="30dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/year"
-            android:textSize="20sp" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="@string/fe"
-            android:textSize="20sp" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="@string/se"
-            android:textSize="20sp" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="@string/te"
-            android:textSize="20sp" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="@string/be"
-            android:textSize="20sp" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/signin_button"
-        android:text="@string/register"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@+id/guideline12"
-        tools:layout_editor_absoluteX="30dp" />
+            <Button
+                android:id="@+id/register"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/signin_button"
+                android:onClick="registerNow"
+                android:text="@string/register"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+    </android.support.design.card.MaterialCardView>
 </android.support.constraint.ConstraintLayout>
