@@ -11,12 +11,12 @@
 
     <android.support.design.card.MaterialCardView
         android:layout_width="341dp"
-        android:layout_height="288dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,14 +24,40 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="312dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/name_login"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/name"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="16dp"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="30dp" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/email_login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/phone"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="16dp"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="30dp" />
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/phone_login"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:ems="10"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -79,8 +105,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/signin_button"
-                android:onClick="registerNow"
+                android:textColor="#ffffff"
                 android:text="@string/register"
+                android:onClick="registerNow"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
