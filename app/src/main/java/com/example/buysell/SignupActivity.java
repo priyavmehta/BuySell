@@ -14,21 +14,38 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
     private TextInputEditText email;
     private TextInputEditText password;
     private TextInputEditText confirmpassword;
     private FirebaseAuth mAuth;
+    private Button registerbutton;
     private FirebaseAuth.AuthStateListener mAuthlistener;
+    FirebaseDatabase database;
+    DatabaseReference myref;
+    String name;
+    String e;
+    String pass;
+    String confirmPass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        database=FirebaseDatabase.getInstance();
+        myref=database.getReference();//.child("Welcome to BUYSELL");
+
         email = findViewById(R.id.email_login);
         password = findViewById(R.id.password);
+        registerbutton=findViewById(R.id.register);
         confirmpassword = findViewById(R.id.confirm_password);
+
+        //myref=database.getReference().child("Welcome to BUYSELL");
         mAuth=FirebaseAuth.getInstance();
         mAuthlistener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -38,6 +55,14 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         };
+        registerbutton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        adduser();
+                    }
+                }
+        );
     }
 
     @Override
@@ -47,11 +72,15 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void adduser(){
-        String e = email.getText().toString();
-        String pass = password.getText().toString();
-        String confirmPass = confirmpassword.getText().toString();
-        if(TextUtils.isEmpty(e) || TextUtils.isEmpty(pass)){
-            Toast.makeText(SignupActivity.this, "Email or Password is not entered", Toast.LENGTH_SHORT).show();
+        e = email.getText().toString();
+        pass = password.getText().toString();
+        confirmPass = confirmpassword.getText().toString();
+        if(TextUtils.isEmpty(e)){
+
+            Toast.makeText(SignupActivity.this, "Email is  not entered", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(pass)){
+            Toast.makeText(SignupActivity.this, "Password is not entered", Toast.LENGTH_SHORT).show();
         }
         else if(!pass.equals(confirmPass)){
             Toast.makeText(SignupActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
@@ -62,6 +91,10 @@ public class SignupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(SignupActivity.this, "User logged in", Toast.LENGTH_SHORT).show();
+                                myref=database.getReference();
+                                myref.child("Priyav");
+                                myref.child("Priyav").child("Email").setValue(e);
+                                myref.child("Priyav").child("Password").setValue(pass);
                                 Intent intent = new Intent(SignupActivity.this, HomePageAcytivity.class);
                                 startActivity(intent);
                             }
@@ -74,7 +107,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    public void registerNow(View view) {
-        adduser();
-    }
+    //public void registerNow(View view) {
+        //adduser();
+    //}
 }
