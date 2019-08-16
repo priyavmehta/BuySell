@@ -1,5 +1,6 @@
 package com.example.buysell;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -7,76 +8,44 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
+
+    private TextInputEditText name;
+    private TextInputEditText phone;
     private TextInputEditText email;
     private TextInputEditText password;
     private TextInputEditText confirmpassword;
-    private FirebaseAuth mAuth;
-    private Button registerbutton;
-    private FirebaseAuth.AuthStateListener mAuthlistener;
-    FirebaseDatabase database;
-    DatabaseReference myref;
-    String name;
-    String e;
-    String pass;
-    String confirmPass;
-
+    private ProgressBar loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
-        database=FirebaseDatabase.getInstance();
-        myref=database.getReference();//.child("Welcome to BUYSELL");
-
-        email = findViewById(R.id.email_login);
-        password = findViewById(R.id.password);
-        registerbutton=findViewById(R.id.register);
-        confirmpassword = findViewById(R.id.confirm_password);
-
-        //myref=database.getReference().child("Welcome to BUYSELL");
-        mAuth=FirebaseAuth.getInstance();
-        mAuthlistener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null) {
-                    Toast.makeText(SignupActivity.this, " Enter email and password ", Toast.LENGTH_LONG).show();
-                }
-            }
-        };
-        registerbutton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        adduser();
-                    }
-                }
-        );
+        name = findViewById(R.id.name_register);
+        phone = findViewById(R.id.phone_register);
+        email = findViewById(R.id.email_register);
+        password = findViewById(R.id.password_register);
+        confirmpassword = findViewById(R.id.confirm_password_register);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthlistener);
-    }
-
-    public void adduser(){
-        e = email.getText().toString();
-        pass = password.getText().toString();
-        confirmPass = confirmpassword.getText().toString();
+    public void addUser(){
+        String Name = name.getText().toString();
+        String Phone = phone.getText().toString();
+        String e = email.getText().toString();
+        String pass = password.getText().toString();
+        String confirmPass = confirmpassword.getText().toString();
         if(TextUtils.isEmpty(e)){
-
             Toast.makeText(SignupActivity.this, "Email is  not entered", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(pass)){
@@ -86,28 +55,55 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(SignupActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
         }
         else {
-            mAuth.createUserWithEmailAndPassword(e, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(SignupActivity.this, "User logged in", Toast.LENGTH_SHORT).show();
-                                myref=database.getReference();
-                                myref.child("Priyav");
-                                myref.child("Priyav").child("Email").setValue(e);
-                                myref.child("Priyav").child("Password").setValue(pass);
-                                Intent intent = new Intent(SignupActivity.this, HomePageAcytivity.class);
-                                startActivity(intent);
-                            }
-                            else{
-                                Toast.makeText(SignupActivity.this, "Sign in problem", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-            );
+            validatePhone(Name, Phone, e, pass);
         }
     }
 
-    //public void registerNow(View view) {
-        //adduser();
-    //}
+    private void validatePhone(final String Name, final String Phone, final String e, final String pass) {
+
+        final DatabaseReference myref;
+        myref = FirebaseDatabase.getInstance().getReference();
+
+        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!(dataSnapshot.child("Users").child(Phone).exists())) {
+                    HashMap<String, Object> userData = new HashMap<>();
+                    userData.put("Name", Name);
+                    userData.put("Phone", Phone);
+                    userData.put("Email", e);
+                    userData.put("Password", pass);
+                    myref.child("Users").child(Phone).updateChildren(userData)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Toast.makeText(SignupActivity.this, "Account created", Toast.LENGTH_SHORT).show();
+                                        Intent in = new Intent(SignupActivity.this, HomePageAcytivity.class);
+                                        startActivity(in);
+                                    }
+                                    else {
+                                        Toast.makeText(SignupActivity.this, "Please try again..", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+                else {
+                    Toast.makeText(SignupActivity.this, "Phone number already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Try using different phone number", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignupActivity.this, loginActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void registerNow(View view) {
+        addUser();
+    }
 }

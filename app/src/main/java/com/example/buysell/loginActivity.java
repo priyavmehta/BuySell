@@ -12,15 +12,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.example.buysell.Model.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class loginActivity extends AppCompatActivity {
 
     //private TextInputEditText email;
-    private EditText email;
+    private EditText phone;
     private EditText password;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthlistener;
@@ -30,17 +36,17 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button loginButton = findViewById(R.id.login_btn);
         Button registerButton = findViewById(R.id.register);
-        email = findViewById(R.id.email_login);
+        phone = findViewById(R.id.phone_login);
         password = findViewById(R.id.password_login);
-        mAuth=FirebaseAuth.getInstance();
-        mAuthlistener=new FirebaseAuth.AuthStateListener() {
+        /*mAuth=FirebaseAuth.getInstance();
+        mAuthlistener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null){
                     Toast.makeText(loginActivity.this," Enter email and password ",Toast.LENGTH_LONG).show();
                 }
             }
-        };
+        };*/
 
         registerButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -55,42 +61,55 @@ public class loginActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        signin();
+                        signIn();
                     }
                 }
         );
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthlistener);
-    }
-    public void signin(){
-        String e=email.getText().toString();
+
+    public void signIn(){
+        String Phone = phone.getText().toString();
         String pass=password.getText().toString();
-        if(TextUtils.isEmpty(e)){
+        if(TextUtils.isEmpty(Phone)){
             Toast.makeText(loginActivity.this, "Email is not entered", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(pass)){
             Toast.makeText(loginActivity.this, "Password is not entered", Toast.LENGTH_SHORT).show();
         }
         else {
+            loginToAccount(Phone, pass);
+        }
+    }
 
+    private void loginToAccount(final String Phone, final String pass) {
+        final DatabaseReference myref;
+        myref = FirebaseDatabase.getInstance().getReference();
 
-            mAuth.signInWithEmailAndPassword(e, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(loginActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(loginActivity.this,HomePageAcytivity.class);
-                                startActivity(intent);
-                            }
-                            else{
-                                Toast.makeText(loginActivity.this, "Sign in problem", Toast.LENGTH_SHORT).show();
-                            }
+        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("Users").child(Phone).exists()){
+                    Users user = dataSnapshot.child("Users").child(Phone).getValue(Users.class);
+                    if (user.getPhone().equals(Phone)) {
+                        if(user.getPassword().equals(pass)) {
+                            Toast.makeText(loginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(loginActivity.this, HomePageAcytivity.class);
+                            startActivity(intent);
                         }
                     }
-            );
-        }
+                    else {
+                        Toast.makeText(loginActivity.this, "Sign in problem...", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(loginActivity.this, "Account does not exist..", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

@@ -44,23 +44,19 @@
             android:orientation="vertical">
 
 
-
-
-
             <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/email_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/e_mail"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            app:met_floatingLabel="highlight"
-            app:met_iconLeft="@drawable/ic_mail_outline_black_24dp"
-            app:met_iconPadding="1dp"
-            app:met_errorColor="#ddaa00"
-
-            />
+                android:id="@+id/phone_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="@string/phone"
+                app:met_errorColor="#ddaa00"
+                app:met_floatingLabel="highlight"
+                android:inputType="phone"
+                app:met_iconLeft="@drawable/ic_mail_outline_black_24dp"
+                app:met_iconPadding="1dp" />
 
             <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
@@ -82,19 +78,19 @@
             <!--android:layout_margin="5dp"-->
             <!--rv_centered="true">-->
             <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            app:met_floatingLabel="highlight"
-            android:inputType="textPassword"
-            android:id="@+id/password_login"
-            app:met_iconLeft="@drawable/ic_mail_outline_black_24dp"
-            app:met_iconPadding="1dp"
+                android:id="@+id/password_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                app:met_floatingLabel="highlight"
+                app:met_iconLeft="@drawable/ic_mail_outline_black_24dp"
+                app:met_iconPadding="1dp"
 
-            />
+                />
             <!--</com.andexert.library.RippleView>-->
             <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
@@ -110,7 +106,6 @@
             <!--android:layout_height="wrap_content"-->
             <!--android:inputType="textPassword"-->
             <!--android:paddingLeft="16dp" />-->
-
 
 
             <Button
