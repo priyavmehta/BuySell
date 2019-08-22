@@ -10,6 +10,7 @@
     tools:context=".SignupActivity">
 
     <android.support.design.card.MaterialCardView
+        android:id="@+id/materialCardView2"
         android:layout_width="341dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -41,7 +42,7 @@
                 android:textSize="20sp"
                 tools:layout_editor_absoluteX="30dp" />
 
-            <android.support.design.widget.TextInputEditText
+          <!--  <android.support.design.widget.TextInputEditText
                 android:id="@+id/phone_register"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -52,7 +53,7 @@
                 android:inputType="phone"
                 android:paddingBottom="16dp"
                 android:textSize="20sp"
-                tools:layout_editor_absoluteX="30dp" />
+                tools:layout_editor_absoluteX="30dp" />-->
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/email_register"
@@ -96,7 +97,7 @@
                 tools:layout_editor_absoluteY="194dp" />
 
             <Button
-                android:id="@+id/register"
+                android:id="@+id/signup"
                 android:layout_width="263dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -105,13 +106,25 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/signin_button"
+                android:text="@string/signup"
                 android:textColor="#ffffff"
-                android:text="@string/register"
-                android:onClick="registerNow"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
     </android.support.design.card.MaterialCardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="23dp"
+        android:layout_height="141dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

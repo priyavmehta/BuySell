@@ -10,6 +10,7 @@
     tools:context=".loginActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -45,16 +46,16 @@
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/phone_login"
+                android:id="@+id/email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="@string/phone"
+                android:hint="Email"
                 app:met_errorColor="#ddaa00"
                 app:met_floatingLabel="highlight"
-                android:inputType="phone"
+                android:inputType="textEmailAddress"
                 app:met_iconLeft="@drawable/ic_mail_outline_black_24dp"
                 app:met_iconPadding="1dp" />
 
@@ -126,6 +127,7 @@
     </android.support.design.card.MaterialCardView>
 
     <android.support.design.card.MaterialCardView
+        android:id="@+id/materialCardView3"
         android:layout_width="327dp"
         android:layout_height="160dp"
         android:layout_marginStart="8dp"
@@ -153,7 +155,7 @@
                 android:textAllCaps="true" />
 
             <Button
-                android:id="@+id/register"
+                android:id="@+id/signup"
                 android:layout_width="263dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -167,4 +169,17 @@
         </LinearLayout>
     </android.support.design.card.MaterialCardView>
 
+    <ProgressBar
+        android:id="@+id/progressBar_login"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
