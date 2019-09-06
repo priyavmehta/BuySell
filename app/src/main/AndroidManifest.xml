@@ -9,7 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomePageAcytivity"></activity>
+        <activity
+            android:name=".SellActivity"
+            android:label="@string/title_activity_sell"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".DetailActivity" />
+        <activity
+            android:name=".StaggeredActivity"
+            android:label="@string/title_activity_staggered"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".HomePageAcytivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".loginActivity" />
         <activity android:name=".SecondActivity" />
