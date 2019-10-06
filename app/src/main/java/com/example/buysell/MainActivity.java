@@ -15,8 +15,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     private static int i=1000;
 
@@ -24,11 +27,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth=FirebaseAuth.getInstance();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, loginActivity.class);
-                startActivity(intent);
+                FirebaseUser firebaseUser=mAuth.getCurrentUser();
+                if(firebaseUser==null) {
+                    Intent intent = new Intent(MainActivity.this, loginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Intent intent = new Intent(MainActivity.this, HomePageAcytivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         }, i);

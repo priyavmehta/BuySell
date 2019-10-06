@@ -8,4 +8,57 @@
     tools:context=".SellActivity"
     tools:showIn="@layout/activity_sell">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <ImageView
+                android:id="@+id/uploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/notavailalable"
+                android:contentDescription="@string/todo" />
+
+
+            <EditText
+                android:id="@+id/upload_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="@string/enter_product_name"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/upload_Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="@string/enter_product_description"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/upload_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="@string/enter_product_price"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.priyavfireapp;
+package com.example.buysell;
 
 public class UploadRegistrationDetails {
     private String contactNo;

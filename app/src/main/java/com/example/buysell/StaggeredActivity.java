@@ -1,5 +1,6 @@
 package com.example.buysell;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,14 +15,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StaggeredActivity extends Fragment {
-    private RecyclerView rv;
+    /*private RecyclerView rv;
     View view;
-    private List<Product> lstProduct = new ArrayList<>();
+    private List<Product> lstProduct = new ArrayList<>();*/
+    View view;
+
+    RecyclerView mRecyclerView;
+    List<Product> myFoodList;
+    private DatabaseReference databaseReference;
+    private ValueEventListener eventListener;
+    ProgressDialog progressDialog;
+    private EditText SearchProducts;
+    private ProductAdapter myAdapter;
 
     public StaggeredActivity() {
     }
@@ -30,7 +47,43 @@ public class StaggeredActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_staggered, container, false);
-        rv = view.findViewById(R.id.recyclerview);
+        mRecyclerView=view.findViewById(R.id.recyclerview);
+
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+
+
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading Products");
+
+        myFoodList=new ArrayList<>();
+
+        myAdapter=new ProductAdapter(getActivity(),myFoodList);
+        mRecyclerView.setAdapter(myAdapter);
+
+        databaseReference= FirebaseDatabase.getInstance().getReference("Products");
+        progressDialog.show();
+        eventListener=databaseReference.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        myFoodList.clear();
+                        for (DataSnapshot productSnapshot: dataSnapshot.getChildren()){
+                            Product product= productSnapshot.getValue(Product.class);
+                            myFoodList.add(product);
+                        }
+                        myAdapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        progressDialog.dismiss();
+                    }
+                }
+        );
+        /*rv = view.findViewById(R.id.recyclerview);
         ProductAdapter productAdapter = new ProductAdapter(getContext(), lstProduct);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setAdapter(productAdapter);
@@ -41,23 +94,14 @@ public class StaggeredActivity extends Fragment {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lstProduct = new ArrayList<>();
-        lstProduct.add(new Product("Rishi", "100", "Book", "Hello man", " ", R.drawable.background_1));
-        lstProduct.add(new Product("Rishi", "100", "Book", "What is that", " ", R.drawable.background_2));
-        lstProduct.add(new Product("Rishi", "100", "Book", "What!!", " ", R.drawable.background_1));
-        lstProduct.add(new Product("Rishi", "100", "Book", "Why?!", " ", R.drawable.background_2));
-        lstProduct.add(new Product("Rishi", "100", "Book", "But but...", " ", R.drawable.background_1));
-        lstProduct.add(new Product("Rishi", "100", "Book", "Huh..", " ", R.drawable.background_1));
-        lstProduct.add(new Product("Rishi", "100", "Book", "Okay", " ", R.drawable.background_1));
-        lstProduct.add(new Product("Rishi", "100", "Book", "Hmmm", " ", R.drawable.background_2));
-        lstProduct.add(new Product("Rishi", "100", "Book", "Ya", " ", R.drawable.background_2));
-        lstProduct.add(new Product("Rishi", "100", "Book", "Nice", " ", R.drawable.background_1));
+
     }
+
 }
