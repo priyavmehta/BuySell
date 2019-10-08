@@ -1,6 +1,7 @@
 package com.example.buysell;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,6 +50,13 @@ public class StaggeredActivity extends Fragment {
         view = inflater.inflate(R.layout.activity_staggered, container, false);
         mRecyclerView=view.findViewById(R.id.recyclerview);
 
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AddToCart.class));
+            }
+        });
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
@@ -56,9 +64,8 @@ public class StaggeredActivity extends Fragment {
         progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading Products");
 
-        myFoodList=new ArrayList<>();
-
-        myAdapter=new ProductAdapter(getActivity(),myFoodList);
+        myFoodList = new ArrayList<>();
+        myAdapter = new ProductAdapter(getActivity(),myFoodList);
         mRecyclerView.setAdapter(myAdapter);
 
         databaseReference= FirebaseDatabase.getInstance().getReference("Products");
@@ -67,10 +74,9 @@ public class StaggeredActivity extends Fragment {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                         myFoodList.clear();
                         for (DataSnapshot productSnapshot: dataSnapshot.getChildren()){
-                            Product product= productSnapshot.getValue(Product.class);
+                            Product product = productSnapshot.getValue(Product.class);
                             myFoodList.add(product);
                         }
                         myAdapter.notifyDataSetChanged();
@@ -83,18 +89,6 @@ public class StaggeredActivity extends Fragment {
                     }
                 }
         );
-        /*rv = view.findViewById(R.id.recyclerview);
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), lstProduct);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv.setAdapter(productAdapter);
-        FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         return view;
     }
 

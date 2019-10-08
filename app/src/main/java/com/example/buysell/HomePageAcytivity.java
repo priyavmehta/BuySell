@@ -24,6 +24,7 @@ public class HomePageAcytivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new StaggeredActivity(), "Buy");
         adapter.addFragment(new SellActivity(), "Sell");
+        adapter.addFragment(new UserInfo(), "User");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

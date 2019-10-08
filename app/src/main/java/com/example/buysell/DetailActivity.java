@@ -2,8 +2,10 @@ package com.example.buysell;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
     private String contact;
     private String seller;
     private Button calling;
+    private Button addToCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +53,18 @@ public class DetailActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         firebaseUser=mAuth.getCurrentUser();
         calling=findViewById(R.id.calling_button);
+        addToCart = findViewById(R.id.add_to_cart);
 
-        Bundle bundle = getIntent().getExtras();
+        final Bundle bundle;
+        bundle = getIntent().getExtras();
+
         if(bundle != null) {
-            String name="Product Name : "+bundle.getString("Title");
-            String des="Product Description : "+bundle.getString("Description");
-            String price="Price : "+bundle.getString("Price");
+            String name;
+            String des;
+            String price;
+            name = "Product Name : "+bundle.getString("Title");
+            des = "Product Description : "+bundle.getString("Description");
+            price = "Price : "+bundle.getString("Price");
 
 
             productDescription.setText(des);
@@ -123,6 +132,15 @@ public class DetailActivity extends AppCompatActivity {
                 else {
                     startActivity(intentCall);
                 }
+            }
+        });
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent mIntent = new Intent(DetailActivity.this, AddToCart.class);
+                mIntent.putExtra("Product", bundle);
+                startActivity(mIntent);
             }
         });
     }

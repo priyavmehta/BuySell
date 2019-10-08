@@ -125,13 +125,11 @@ public class SellActivity extends Fragment {
     public void TakeImage(){
         Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, PICK_IMAGE);
-
     }
 
     public void ChooseImage(){
         Intent photoPicker=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(photoPicker,PICK_IMAGE);
-
     }
 
 

@@ -44,7 +44,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         productViewHolder.productName.setText(products.get(i).getProductTitle());
         productViewHolder.productPrice.setText(products.get(i).getProductPrice());
         productViewHolder.productDescription.setText(products.get(i).getProductDescription());
-        //productViewHolder.productPicture.setImageResource(products.get(i).getImage());
 
         productViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,4 +77,5 @@ class ProductViewHolder extends RecyclerView.ViewHolder {
         productPicture = itemView.findViewById(R.id.productImage);
         cardView = itemView.findViewById(R.id.cardview);
     }
+
 }
