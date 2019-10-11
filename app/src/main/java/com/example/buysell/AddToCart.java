@@ -60,8 +60,6 @@ public class AddToCart extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("cart");
         progressDialog.show();
-        CartItem mcart = new CartItem("Rishi", "Kaul");
-        databaseReference.child("Scooter").setValue(mcart);
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

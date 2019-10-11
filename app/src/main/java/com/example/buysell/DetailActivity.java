@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -112,7 +113,7 @@ public class DetailActivity extends AppCompatActivity {
                     String name1 = nameSnapshot.child("name").getValue(String.class);
                     if (name1.equals(seller)) {
                         contact=nameSnapshot.child("contactNo").getValue(String.class);
-                        phone.setText("Contact Number: "+contact);
+                        phone.setText(contact);
                     }
                 }
             }
@@ -126,9 +127,8 @@ public class DetailActivity extends AppCompatActivity {
         calling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String con=phone.getText().toString();
                 Intent intentCall=new Intent(Intent.ACTION_CALL);
-                intentCall.setData(Uri.parse("tel:"+"8928691948"));
+                intentCall.setData(Uri.parse("tel:"+phone.getText().toString()));
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
                     Toast.makeText(DetailActivity.this, "Please Grant Permissions", Toast.LENGTH_SHORT).show();
                     request();
