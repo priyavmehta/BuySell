@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,6 +60,7 @@ public class DetailActivity extends AppCompatActivity {
 
         final Bundle bundle;
         bundle = getIntent().getExtras();
+        final CartItem cartItem = new CartItem(bundle.getString("Title"), bundle.getString("Price"));
 
         if(bundle != null) {
             String name;
@@ -137,10 +141,7 @@ public class DetailActivity extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent mIntent = new Intent(DetailActivity.this, AddToCart.class);
-                mIntent.putExtra("Product", bundle);
-                startActivity(mIntent);
+                uploadData(cartItem);
             }
         });
     }
@@ -151,4 +152,22 @@ public class DetailActivity extends AppCompatActivity {
     public void request(){
         ActivityCompat.requestPermissions(DetailActivity.this,new String[]{Manifest.permission.CALL_PHONE},1);
     }
+    private void uploadData(CartItem cartItem) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userKey = currentUser.getUid();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users").child(userKey).child("cart");
+        db.child(cartItem.getTitle()).setValue(cartItem).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                    Toast.makeText(DetailActivity.this, "Done", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(DetailActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+

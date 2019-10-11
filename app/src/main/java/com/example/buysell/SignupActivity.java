@@ -111,10 +111,12 @@ public class SignupActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressDialog.dismiss();
+                                FirebaseUser registeredUser = FirebaseAuth.getInstance().getCurrentUser();
+                                String userUid = registeredUser.getUid();
                                 uploadRegistrationDetails=new UploadRegistrationDetails(ContactNo,registerPassword,registerEmail,register_name);
                                 //String CurrentTime= DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
                                 myRef=database.getReference("Users");
-                                myRef.child(register_name).setValue(uploadRegistrationDetails);
+                                myRef.child(userUid).setValue(uploadRegistrationDetails);
                                 Toast.makeText(SignupActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
 
                                 FirebaseUser user=mAuth.getCurrentUser();

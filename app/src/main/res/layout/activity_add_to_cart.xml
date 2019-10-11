@@ -30,7 +30,7 @@
         android:layout_below="@+id/rl1"
         android:layout_above="@+id/next_process_button"
 
-        ></android.support.v7.widget.RecyclerView>
+        />
     <Button
         android:id="@+id/next_process_button"
         android:layout_width="match_parent"
