@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class DetailActivity extends AppCompatActivity {
     private String seller;
     private Button calling;
     private Button addToCart;
+    private ImageButton whatsapp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,20 +60,16 @@ public class DetailActivity extends AppCompatActivity {
         firebaseUser=mAuth.getCurrentUser();
         calling=findViewById(R.id.calling_button);
         addToCart = findViewById(R.id.add_to_cart);
+        whatsapp = findViewById(R.id.whatsapp_button);
 
         final Bundle bundle;
         bundle = getIntent().getExtras();
         final CartItem cartItem = new CartItem(bundle.getString("Title"), bundle.getString("Price"));
 
         if(bundle != null) {
-            String name;
-            String des;
-            String price;
-            name = "Product Name : "+bundle.getString("Title");
-            des = "Product Description : "+bundle.getString("Description");
-            price = "Price : "+bundle.getString("Price");
-
-
+            String name = "Product Name : " + bundle.getString("Title");
+            String des = "Product Description : " + bundle.getString("Description");
+            String price = "Price : " + bundle.getString("Price");
             productDescription.setText(des);
             productTitle.setText(name);
             productPrice.setText(price);
@@ -144,6 +142,12 @@ public class DetailActivity extends AppCompatActivity {
                 uploadData(cartItem);
             }
         });
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickWhatsapp(phone);
+            }
+        });
     }
     public void got(String ba){
         Toast.makeText(this, ba, Toast.LENGTH_SHORT).show();
@@ -168,6 +172,13 @@ public class DetailActivity extends AppCompatActivity {
                 Toast.makeText(DetailActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void onClickWhatsapp(TextView phone) {
+        String number = "91" + phone.getText().toString();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        String text = "I saw your product on BuySell and I'm interested";
+        intent.setData(Uri.parse("http://api.whatsapp.com/send?phone="+number +"&text="+text));
+        startActivity(intent);
     }
 }
 

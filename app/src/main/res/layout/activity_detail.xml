@@ -83,7 +83,19 @@
                     android:layout_marginRight="20dp"
                     android:background="#ffffff"
                     android:drawableStart="@drawable/call_file"
+
                     android:padding="20dp" />
+
+                <ImageButton
+                    android:id="@+id/whatsapp_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/whatsapp" />
 
 
             </LinearLayout>
@@ -92,7 +104,7 @@
                 android:id="@+id/add_to_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add to cart"/>
+                android:text="Add to cart" />
 
         </LinearLayout>
 

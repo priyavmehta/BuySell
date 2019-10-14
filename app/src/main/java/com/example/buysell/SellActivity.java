@@ -82,9 +82,6 @@ public class SellActivity extends Fragment {
         name = (EditText) view.findViewById(R.id.upload_name);
         des = (EditText) view.findViewById(R.id.upload_Description);
         Price = (EditText) view.findViewById(R.id.upload_price);
-        //seller_name=(EditText) view.findViewById(R.id.upload_seller_name);
-        //selectIm = (Button) view.findViewById(R.id.selectImage);
-        //upload = (Button) view.findViewById(R.id.uploadProduct);
         dataImage = (ImageView) view.findViewById(R.id.uploadImage);
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
