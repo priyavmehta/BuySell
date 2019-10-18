@@ -5,4 +5,6 @@
     <color name="colorPrimaryLight">#D1C4E9</color>
     <color name="colorAccent">#FFC107</color>
     <color name="clickEffect">#D8D2D2</color>
+    <color name="Black">#000000</color>
+    <color name="Green">#01AF07</color>
 </resources>

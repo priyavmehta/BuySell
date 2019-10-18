@@ -33,7 +33,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:padding="20dp"
-                android:textSize="20sp" />
+                android:textSize="30sp"
+                android:textColor="@color/Black"
+                android:fontFamily="sans-serif-medium"
+                />
 
             <TextView
                 android:id="@+id/txtDescription"
@@ -41,7 +44,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:padding="20dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/Black"
+                />
 
             <TextView
                 android:id="@+id/detailPrice"
@@ -49,7 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:padding="20dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+
+                android:textColor="@color/Black"/>
 
             <TextView
                 android:id="@+id/username"
@@ -57,12 +64,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:padding="20dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/Black"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+
+                >
 
                 <TextView
                     android:id="@+id/call"
@@ -71,20 +82,26 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="20dp"
                     android:padding="20dp"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:autoLink="phone"
+                    android:textColorLink="@color/Black"
+                    />
 
                 <Button
                     android:id="@+id/calling_button"
                     android:layout_width="75dp"
-                    android:layout_height="50dp"
+                    android:layout_height="75dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="20dp"
                     android:background="#ffffff"
+                    android:src="@drawable/call_file"
                     android:drawableStart="@drawable/call_file"
 
-                    android:padding="20dp" />
+                    android:padding="20dp"
+                    android:visibility="gone"
+                    />
 
                 <ImageButton
                     android:id="@+id/whatsapp_button"
@@ -102,9 +119,12 @@
 
             <Button
                 android:id="@+id/add_to_cart"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add to cart" />
+                android:text="Add to cart"
+                android:textColor="#FFF"
+                android:background="@color/Green"
+                />
 
         </LinearLayout>
 

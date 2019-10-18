@@ -23,8 +23,9 @@
                 android:id="@+id/uploadImage"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/notavailalable"
+                android:scaleType="fitCenter"
+                android:src="@drawable/plus"
+                android:background="@color/colorPrimaryLight"
                 android:contentDescription="@string/todo" />
 
 
