@@ -7,4 +7,7 @@
     <color name="clickEffect">#D8D2D2</color>
     <color name="Black">#000000</color>
     <color name="Green">#01AF07</color>
+    <color name="colorStart">#36d1dc</color>
+    <color name="colorCenter">#3A7BA2</color>
+    <color name="colorStop">#5b86e5</color>
 </resources>

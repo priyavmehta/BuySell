@@ -1,6 +1,7 @@
 package com.example.buysell;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class loginActivity extends AppCompatActivity {
     private EditText password;
     private FirebaseAuth mAuth;
     private ProgressBar loadingbar;
+    private android.support.constraint.ConstraintLayout constraintLayout;
+    private AnimationDrawable backgroundGradient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,11 @@ public class loginActivity extends AppCompatActivity {
         Button registerButton = findViewById(R.id.signup);
         email = findViewById(R.id.email_login);
         loadingbar = findViewById(R.id.progressBar_login);
+        constraintLayout = findViewById(R.id.constraintl);
+        backgroundGradient = (AnimationDrawable)constraintLayout.getBackground();
+        backgroundGradient.setEnterFadeDuration(5000);
+        backgroundGradient.setExitFadeDuration(5000);
+        backgroundGradient.start();
         password = findViewById(R.id.password_login);
         mAuth = FirebaseAuth.getInstance();
 

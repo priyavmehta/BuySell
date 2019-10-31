@@ -2,6 +2,7 @@ package com.example.buysell;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,8 @@ public class SignupActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private android.support.constraint.ConstraintLayout constraintLayout;
+    private AnimationDrawable animationDrawable;
     String registerEmail;
     String registerPassword;
     String confirmPassword;
@@ -59,7 +62,11 @@ public class SignupActivity extends AppCompatActivity {
         register_button=findViewById(R.id.register_button);
         alreadySignedIn=findViewById(R.id.already_signed_in);
         database=FirebaseDatabase.getInstance();
-
+        constraintLayout = findViewById(R.id.cl1);
+        animationDrawable = (AnimationDrawable)constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
         register_button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
