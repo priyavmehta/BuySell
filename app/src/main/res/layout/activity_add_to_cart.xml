@@ -31,14 +31,18 @@
         android:layout_above="@+id/next_process_button"
 
         />
+
     <Button
         android:id="@+id/next_process_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
-        android:text="Next"
+        android:text="Buy"
         android:textColor="#fff"
-        android:textSize="20sp"
-        android:layout_margin="8dp"/>
+        android:textSize="20sp" />
 </RelativeLayout>

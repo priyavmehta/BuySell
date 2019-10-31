@@ -7,6 +7,17 @@ public class Product {
     private String productDescription;
     private String imageUrl;
     private String image;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 
     public String getImage() {
         return image;
@@ -16,19 +27,20 @@ public class Product {
         this.image = image;
     }
 
-    public Product(String productTitle, String productDescription, String productPrice, String image, String sellerName) {
+    public Product(String productTitle, String productDescription, String productPrice, String image, String sellerName, String id) {
         this.sellerName = sellerName;
         this.productPrice = productPrice;
         this.productTitle = productTitle;
         this.productDescription = productDescription;
         //this.imageUrl = imageUrl;
+        this.id = id;
         this.image = image;
     }
     public Product(String productTitle, String productPrice) {
         this.productTitle = productTitle;
         this.productPrice = productPrice;
     }
-    public Product(){
+    public Product() {
 
     }
 

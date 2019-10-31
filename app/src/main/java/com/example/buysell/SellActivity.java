@@ -14,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class SellActivity extends Fragment {
     View view;
     public SellActivity() {
     }
-
+    String TAG = "Sell Activity";
     private EditText name;
     private EditText des;
     private EditText Price;
@@ -66,6 +67,7 @@ public class SellActivity extends Fragment {
     private ValueEventListener valueEventListener;
     private DatabaseReference databaseReference;
     private String contact;
+    private String id;
 
     @Nullable
     @Override
@@ -172,10 +174,13 @@ public class SellActivity extends Fragment {
     public void uploadData() {
         firebaseUser = mAuth.getCurrentUser();
         String name1 = firebaseUser.getDisplayName();
-        Product product = new Product(name.getText().toString(), des.getText().toString(), Price.getText().toString(), ImageUrl, name1);
-        String CurrentTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         myRef = database.getReference("Products");
-        myRef.child(CurrentTime).setValue(product).addOnCompleteListener(
+        id = myRef.push().getKey();
+        Log.d(TAG, "uploadData: " + id);
+        Product product = new Product(name.getText().toString(), des.getText().toString(), Price.getText().toString(), ImageUrl, name1, id);
+        String CurrentTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+
+        myRef.child(id).setValue(product).addOnCompleteListener(
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

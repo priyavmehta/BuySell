@@ -64,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
 
         final Bundle bundle;
         bundle = getIntent().getExtras();
-        final CartItem cartItem = new CartItem(bundle.getString("Title"), bundle.getString("Price"));
+        final CartItem cartItem = new CartItem(bundle.getString("Title"), bundle.getString("Price"),bundle.getString("Id"));
 
         if(bundle != null) {
             String name = "Product Name : " + bundle.getString("Title");
